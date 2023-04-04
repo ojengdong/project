@@ -1,0 +1,144 @@
+.wrapper {
+    width: 1200px;
+    margin: 200px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    flex-direction: column;
+  }
+  
+  /* 로그인페이지 text */
+  .text {
+    text-align: center;
+    margin: 10px 0;
+  }
+  
+  /* 아이디, 비밀번호 text */
+  .login-warn {
+    color: #4f4f4f;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* 로그인 페이지 input */
+  .input-box {
+    border: 2px solid #848484;
+    border-radius: 8px;
+    width: 500px;
+    height: 60px;
+    align-items: center;
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  .input-box input {
+    margin: 0 10px;
+    width: 450px;
+    height: 50px;
+    border: none;
+  }
+  
+  .input-box input:focus {
+    outline: none;
+  }
+  
+  /* 로그인페이지 아이디저장 및 아이디찾기, 비밀번호 찾기 div*/
+  .login-functionbox {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+  }
+  
+  .keeptext-box{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .check-img {
+    margin-right: 7px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* 아이디 찾기, 비밀번호 찾기 */
+  .find-wrapbox div {
+    border: 1px solid #848484;
+  }
+  
+  .find-wrapbox ul {
+    display: flex;
+    grid-gap: 10px;
+  }
+  
+  .find-wrapbox li {
+    list-style: none;
+    cursor: pointer;
+  }
+  
+  /* 로그인 페이지 회원가입, 로그인 버튼 */
+  .login-btn-box {
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0;
+  }
+  
+  /* 로그인 페이지 로그인 버튼 */
+  #login-btn {
+    width: 500px;
+    height: 60px;
+    font-size: 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    background-color: #030351;
+    color: #fff;
+  }
+  
+  /* 로그인 페이지 회원가입버튼 */
+  #Ragister-btn {
+    width: 500px;
+    height: 60px;
+    font-size: 20px;
+    border-radius: 8px;
+    background-color: transparent;
+    border: 2px solid #848484;
+  }
+  
+  /* 로그인 페이지 sns div */
+  .sns-borderbox {
+    width: 100%;
+    display: flex;
+    grid-row-gap: 150px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    grid-gap: 1.6rem;
+  }
+  
+  .sns-border {
+    width: 150px;
+    border: 1px solid #848484;
+  }
+  
+  .sns-img {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 500px;
+  }
+  
+  .sns-img img {
+    width: 80px;
+  }

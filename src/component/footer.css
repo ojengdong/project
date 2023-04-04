@@ -1,0 +1,22 @@
+li {
+    list-style: none;
+}
+
+.footer-box {
+    width: 800px;
+    color: #8d9091;
+}
+
+.text-list {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
