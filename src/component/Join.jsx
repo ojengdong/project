@@ -17,6 +17,9 @@ const Join = (props) => {
   const [name, setName] = useState(""); // 이름
   const [email, setEmail] = useState(""); // 이메일
   const [phoneNum, setPhoneNum] = useState(""); // 휴대폰 번호
+  const [year, setYear] = useState(""); // 연도
+  const [month, setMonth] = useState(""); //월
+  const [day, setDay] = useState(""); // 일
 
   // 오류메세지 상태 저장
   const [idMessage, setIdMessage] = useState(""); // 아이디 메세지
@@ -25,6 +28,7 @@ const Join = (props) => {
   const [nameMessage, setNameMessage] = useState(""); // 이름 메세지
   const [emailMessage, setEmailMessage] = useState(""); // 이메일 메세지
   const [phonenumMessage, setPhoneMessage] = useState(""); // 전화번호 메세지
+  const [birthMessage, setBirthMessage] = useState(""); // 생년월일 메세지
 
   // 유효성 검사
   const [isId, setIsId] = useState(false); // 아이디
@@ -33,6 +37,10 @@ const Join = (props) => {
   const [isName, setIsName] = useState(false); // 이름
   const [isEmail, setIsEmail] = useState(false); //이메일
   const [isPhonenum, setIsPhonenum] = useState(false); // 전화번호
+  // const [isYear, setIsYear] = useState(false); // 연도
+  // const [isMonth, setIsMonth] = useState(false); // 월
+  // const [isDay, setIsDay] = useState(false); // 일
+  const [isbirth, setIsBirth] = useState(false);
 
   // 아이디
   // 1. id input에 focusout 됬을 때 그것의 글자수가 0이 됬을 때(조건)
@@ -83,7 +91,7 @@ const Join = (props) => {
       setPwChkMessage("비밀번호가 다릅니다.");
       setIsPwchk(false);
     } else {
-      setPwChkMessage("통과입니다.");
+      setPwChkMessage("");
       setIsPwchk(true);
     }
   };
@@ -117,6 +125,8 @@ const Join = (props) => {
   const phoneNumber = (e) => {
     let phoneregExp = /^[0-9]{11}$/;
     setPhoneNum(e.target.value);
+    console.log(e.target.value);
+    // setPhoneNum.test(phoneNum);
     // console.log(phoneNum.test(phoneNum));
     if (phoneNum.length === 0) {
       setPhoneMessage("필수요소입니다");
@@ -127,6 +137,33 @@ const Join = (props) => {
     } else {
       setPhoneMessage("");
       setIsPhonenum(true);
+    }
+  };
+
+  // 생년월일
+  const birth = (e) => {
+    setYear(e.target.value)
+    setMonth(e.target.value)
+    setDay(e.target.value)
+
+    // 현재 날짜 및 시간
+    let now = new Date();
+    console.log(now);
+
+    let nowstramp = now.getTime();
+    now = now.getFullYear();
+    console.log(now);
+
+    let bir = new Date(year, month, day);
+    bir = bir.getTime();
+
+    if((isNaN(year) == true) || (isNaN(month) == true) || (isNaN(day) == true)) {
+      setBirthMessage("생년월일을 다시 확인해주세요")
+    }else if (nowstramp < year || nowstramp < month || nowstramp < day) {
+      setBirthMessage("미래에서 오셨네요");
+    }else {
+      setBirthMessage("");
+      setIsBirth(true)
     }
   };
 
@@ -212,10 +249,17 @@ const Join = (props) => {
                     className="year"
                     maxLength={4}
                     placeholder="년(4자)"
+                    onChange={birth}
+                    //value={year}
                   />
                 </div>
                 <div className="month-box">
-                  <select name="" className="month">
+                  <select
+                    name="month"
+                    className="month"
+                    onChange={birth}
+                    //value={month}
+                  >
                     <option value="">월</option>
                     <option value="0">1</option>
                     <option value="1">2</option>
@@ -238,9 +282,12 @@ const Join = (props) => {
                     className="day"
                     maxLength={2}
                     placeholder="일"
+                    onChange={birth}
+                    //value={day}
                   />
                 </div>
               </div>
+              <p>{birthMessage}</p>
             </label>
           </div>
 
@@ -279,11 +326,9 @@ const Join = (props) => {
             <div className="phonenum">
               <div className="country">
                 <select name="country">
+                  <option value="82">대한민국 +82</option>
                   <option value="233">가나 +233</option>
                   <option value="30">그리스 +30</option>
-                  <option value="82" selected>
-                    대한민국 +82
-                  </option>
                   <option value="49">독일 +49</option>
                   <option value="960">몰디브 +960</option>
                   <option value="1">미국/캐나다 +1</option>
