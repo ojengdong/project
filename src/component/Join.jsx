@@ -7,9 +7,7 @@ import unlock from "./images/작성란 아이콘-02.png"; // 자물쇠2
 import Footer from "./footer";
 import "./Join.css";
 
-// logo, 아이디v, 비밀번호v, 비밀번호재확인v, 이름v, 생년월일, 성별(select), 본인확인이메일v, 휴대폰번호(나라, 전화번호, 인증번호), 가입하기(버튼), footer, css
-
-const Join = (props) => {
+const Join = (props, e) => {
   // 초기값 세팅
   const [id, setId] = useState(""); // 아이디
   const [password, setPassword] = useState(""); // 비밀번호
@@ -30,38 +28,21 @@ const Join = (props) => {
   const [phonenumMessage, setPhoneMessage] = useState(""); // 전화번호 메세지
   const [birthMessage, setBirthMessage] = useState(""); // 생년월일 메세지
 
-  // 유효성 검사
-  const [isId, setIsId] = useState(false); // 아이디
-  const [isPw, setIsPw] = useState(false); // 비밀번호
-  const [isPwchk, setIsPwchk] = useState(false); // 비밀번호 재확인
-  const [isName, setIsName] = useState(false); // 이름
-  const [isEmail, setIsEmail] = useState(false); //이메일
-  const [isPhonenum, setIsPhonenum] = useState(false); // 전화번호
-  // const [isYear, setIsYear] = useState(false); // 연도
-  // const [isMonth, setIsMonth] = useState(false); // 월
-  // const [isDay, setIsDay] = useState(false); // 일
-  const [isbirth, setIsBirth] = useState(false);
+  let isId, isPw, isPwchk, isName, isEmail, isPhonenum,isBirth = false
 
   // 아이디
-  // 1. id input에 focusout 됬을 때 그것의 글자수가 0이 됬을 때(조건)
-  // '아이디를 입력해주세요'라고 쓴다(실행)
-  // 2.id input에 focusout 됬을 때 그것의 글자수가 4 ~ 12자 안됬을 때 (조건)
-  // '4 ~ 12자 대소문자 또는 숫자만 입력해 주세요!' 라고 쓴다(실행)
-  // 3. .1, .2 모두 조건이 맞을 떄(조건)
-  // '사용 가능한 아이디 입니다.'라고 쓴다(실행)
   const idfocusout = (e) => {
     setId(e.target.value);
     console.log(e.target.value);
     const idreg = /^[a-zA-z0-9]{4,12}$/;
+    isId = false;
     if (id.length === 0) {
       setIdMessage("아이디를 입력해주세요");
-      setIsId(false);
     } else if (id.length < 4 || id.length > 12 === idreg) {
       setIdMessage("4 ~ 12자 대소문자 또는 숫자만 입력해 주세요!");
-      setIsId(false);
     } else {
       setIdMessage("사용 가능한 아이디 입니다.");
-      setIsId(true);
+      isId = true;
     }
   };
 
@@ -69,42 +50,44 @@ const Join = (props) => {
   const pwfocusout = (e) => {
     setPassword(e.target.value);
     console.log(e.target.value);
+
+    isPw = false
+
     if (password.length === 0) {
       setPwMessage("비밀번호를 입력해주세요");
-      setIsPw(false);
+      isPw = false;
     } else if (password.length < 8 || password.length > 16) {
       setPwMessage("8 ~ 16자 가능합니다");
-      setIsPw(false);
     } else {
       setPwMessage("사용가능합니다.");
-      setIsPw(true);
+      isPw = true;
     }
   };
 
   // 비밀번호 재확인
   const pwchkfocusout = (e) => {
     setPasswordChk(e.target.value);
+    isPwchk = false
     if (passwordChk.length === 0) {
       setPwChkMessage("필수요소입니다.");
-      setIsPwchk(false);
     } else if (password !== passwordChk) {
       setPwChkMessage("비밀번호가 다릅니다.");
-      setIsPwchk(false);
     } else {
       setPwChkMessage("");
-      setIsPwchk(true);
+      isPwchk = true
     }
   };
 
   // 이름
   const namefocusout = (e) => {
     setName(e.target.value);
+
+    isName = false
     if (name.length === 0) {
       setNameMessage("필수요소입니다.");
-      setIsName(false);
     } else {
       setNameMessage("");
-      setIsName(true);
+      isName = true
     }
   };
 
@@ -115,10 +98,8 @@ const Join = (props) => {
       /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
     if (!emailregExp.test(email)) {
       setEmailMessage("이메일 주소를 다시 확인해주세요");
-      setIsEmail(false);
     } else {
       setEmailMessage("");
-      setIsEmail(true);
     }
   };
 
@@ -126,25 +107,33 @@ const Join = (props) => {
     let phoneregExp = /^[0-9]{11}$/;
     setPhoneNum(e.target.value);
     console.log(e.target.value);
+
+    isPhonenum = false;
     // setPhoneNum.test(phoneNum);
     // console.log(phoneNum.test(phoneNum));
     if (phoneNum.length === 0) {
       setPhoneMessage("필수요소입니다");
-      setIsPhonenum(false);
     } else if (isNaN(phoneNum)) {
       setPhoneMessage("숫자만 입력해주세요");
-      setIsPhonenum(false);
     } else {
       setPhoneMessage("");
-      setIsPhonenum(true);
+      isPhonenum = true;
     }
   };
 
+  const phonekey = () => {
+    let phoneregExp = /^[0-9]{11}$/;
+
+    if(ddd) {
+      
+    }
+  }
+
   // 생년월일
   const birth = (e) => {
-    setYear(e.target.value)
-    setMonth(e.target.value)
-    setDay(e.target.value)
+    setYear, setMonth, setDay(e.target.value);
+
+    isBirth = false
 
     // 현재 날짜 및 시간
     let now = new Date();
@@ -156,14 +145,17 @@ const Join = (props) => {
 
     let bir = new Date(year, month, day);
     bir = bir.getTime();
+    console.log(year);
 
-    if((isNaN(year) == true) || (isNaN(month) == true) || (isNaN(day) == true)) {
-      setBirthMessage("생년월일을 다시 확인해주세요")
-    }else if (nowstramp < year || nowstramp < month || nowstramp < day) {
-      setBirthMessage("미래에서 오셨네요");
-    }else {
+    if (isNaN(year) == true || isNaN(month) == true || isNaN(day) == true) {
+      setBirthMessage("생년월일을 다시 확인해주세요");
+    }else if (year.length != 4 && year.length === 4) {
+      setBirthMessage("태어난 연도 4자리를 정확하게 입력해주세요");
+    }else if (day.length === 0 || day > 31 || day < 1) {
+      setBirthMessage("태어난 일(날짜)을 정확하게 입력해주세요");
+    } else {
       setBirthMessage("");
-      setIsBirth(true)
+      isBirth = true;
     }
   };
 
@@ -250,7 +242,8 @@ const Join = (props) => {
                     maxLength={4}
                     placeholder="년(4자)"
                     onChange={birth}
-                    //value={year}
+                    onBlur={birth}
+                    // value={year}
                   />
                 </div>
                 <div className="month-box">
@@ -258,6 +251,7 @@ const Join = (props) => {
                     name="month"
                     className="month"
                     onChange={birth}
+                    onBlur={birth}
                     //value={month}
                   >
                     <option value="">월</option>
@@ -283,7 +277,8 @@ const Join = (props) => {
                     maxLength={2}
                     placeholder="일"
                     onChange={birth}
-                    //value={day}
+                    onBlur={birth}
+                    //value={props.day}
                   />
                 </div>
               </div>
@@ -333,6 +328,7 @@ const Join = (props) => {
                   <option value="960">몰디브 +960</option>
                   <option value="1">미국/캐나다 +1</option>
                   <option value="254">케나 +254</option>
+                  <option value="">프랑스 +</option>
                 </select>
               </div>
               <div className="number">

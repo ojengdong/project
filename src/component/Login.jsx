@@ -1,10 +1,11 @@
 /* eslint-disable */
 import React from "react";
+import { useCookies } from 'react-cookie'
 import './Login.css'
 import Ragister from "./Ragister";
 import { Link } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import naver from "./images/로그인 아이콘-02.png"; // naver icon
 import apple from "./images/로그인 아이콘-03.png"; // apple icon
 import kakao from "./images/로그인 아이콘-04.png"; // kakao icon
@@ -14,6 +15,25 @@ import idsth from "./images/로그인 아이콘-05.png"; // check
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const [idSave, setIdSave] = useState(false);
+  const [keepid, setKeepId] = useState("");
+  const [isRemember, setIsRemember] = useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies(['rememberId']);
+
+  useEffect(() => {
+    if(cookies.rememberId !== undefined) {
+      setKeepId(cookies.rememberId);
+      setIsRemember(true);
+    }
+  }, [])
+
+  const handleOnChange = (e) => {
+    setIsRemember(e.target.check);
+    if(e.target.check){
+      setCookie('rememberId', id)
+    }else {
+      removeCookie('rememberId');
+    }
+  }
 
   return (
     <div className="wrapper">
@@ -55,6 +75,8 @@ const Login = () => {
                   onClick={() => {
                     setIdSave(!idSave);
                   }}
+
+                  onChange={handleOnChange}
                 ></div>
 
                 <p
