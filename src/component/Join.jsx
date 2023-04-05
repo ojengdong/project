@@ -121,14 +121,6 @@ const Join = (props, e) => {
     }
   };
 
-  const phonekey = () => {
-    let phoneregExp = /^[0-9]{11}$/;
-
-    if(ddd) {
-      
-    }
-  }
-
   // 생년월일
   const birth = (e) => {
     setYear, setMonth, setDay(e.target.value);
@@ -157,7 +149,33 @@ const Join = (props, e) => {
       setBirthMessage("");
       isBirth = true;
     }
+
+    
   };
+
+  const [code, setCode] = useState('');
+  const[inputCode, setInputCode] = useState('');
+
+  useEffect(() => {
+    let code = '';
+    for(let i = 0; i < 4; i++) {
+      code += Math.floor(Math.random() * 10);
+    }
+    setCode(code);
+  }, [])
+
+  const handleChange = (e) => {
+    setInputCode(e.target.value);
+    console.log(setInputCode)
+  }
+
+  const handleClick = () => {
+    if(inputCode === code) {
+      alert('인증에 성공했습니다.');
+    }else {
+      alert('인증번호가 일치하지 않습니다.')
+    }
+  }
 
   return (
     <div className="wrapper">
@@ -337,18 +355,18 @@ const Join = (props, e) => {
                     type="text"
                     name="phonenum"
                     placeholder="전화번호 입력"
-                    onChange={phoneNumber}
+                    onChange={handleChange}
                     onBlur={phoneNumber}
-                    value={phoneNum}
+                    value={inputCode}
                   />
                 </div>
-                <button type="button">인증번호</button>
+                <button type="button" onClick={handleClick}>인증번호</button>
               </div>
               <p className="warn">{phonenumMessage}</p>
 
               <div className="disinput inp">
                 {/* API로 인증번호따오기 */}
-                <input type="text" placeholder="인증번호" disabled />
+                <input type="text" placeholder="인증번호"  />
               </div>
 
               <div className="event">
