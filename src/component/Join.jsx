@@ -1,11 +1,13 @@
 /* eslint-disable */
 import React from "react";
 import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "./images/동의 아이콘 3.png"; // logo
 import lock from "./images/작성란 아이콘_대지 1.png"; // 자물쇠1
 import unlock from "./images/작성란 아이콘-02.png"; // 자물쇠2
 import Footer from "./footer";
 import "./Join.css";
+import Login from './Login'
 
 const Join = (props, e) => {
   // 초기값 세팅
@@ -97,7 +99,7 @@ const Join = (props, e) => {
   const emailfocus = (e) => {
     setEmail(e.target.value);
     let emailregExp = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
-    if (!emailregExp.test(email)) {
+    if (email != emailregExp.test(email)) {
       setEmailMessage("이메일 주소를 다시 확인해주세요");
     } else {
       setEmailMessage("");
@@ -321,12 +323,7 @@ const Join = (props, e) => {
               본인 확인 이메일<span>(선택)</span>
             </strong>
             <div className="inp">
-              <input
-                type="text"
-                name="email"
-                onChange={emailfocus}
-                onBlur={emailfocus}
-              />
+              <input type="text" name="email" onChange={emailfocus} />
             </div>
             <p className="warn">{emailMessage}</p>
           </div>
@@ -342,10 +339,6 @@ const Join = (props, e) => {
                   <option value="233">가나 +233</option>
                   <option value="30">그리스 +30</option>
                   <option value="49">독일 +49</option>
-                  <option value="960">몰디브 +960</option>
-                  <option value="1">미국/캐나다 +1</option>
-                  <option value="254">케나 +254</option>
-                  <option value="">프랑스 +</option>
                 </select>
               </div>
               <div className="number">
@@ -377,20 +370,12 @@ const Join = (props, e) => {
         </div>
 
         {/* 가입하기버튼*/}
-        {/* isId && isPw && isPwchk && isName && isPhonenum && isveritext && isBirth */}
         <div className="join-btn-box">
-          <button type="submit" onClick={() => {
-            if (!veri === false){
-              alert('필수요소를 입력해주세요');
-            }else {
-              SubmitEvent
-            }
-          }}>가입하기</button>
+          <form onSubmit={<Login/>}>
+          <button type="button">가입하기</button>
+          </form>
         </div>
-
-        <div className="footer">
           <Footer />
-        </div>
       </div>
     </div>
   );
