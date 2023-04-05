@@ -15,6 +15,7 @@ const Join = (props, e) => {
   const [name, setName] = useState(""); // 이름
   const [email, setEmail] = useState(""); // 이메일
   const [phoneNum, setPhoneNum] = useState(""); // 휴대폰 번호
+  const [veritext, setVeritext] = useState("") // 인증번호 input
   const [year, setYear] = useState(""); // 연도
   const [month, setMonth] = useState(""); //월
   const [day, setDay] = useState(""); // 일
@@ -26,23 +27,26 @@ const Join = (props, e) => {
   const [nameMessage, setNameMessage] = useState(""); // 이름 메세지
   const [emailMessage, setEmailMessage] = useState(""); // 이메일 메세지
   const [phonenumMessage, setPhoneMessage] = useState(""); // 전화번호 메세지
+  const [veritextMessage, setVeriTextMessage] = useState("") 
   const [birthMessage, setBirthMessage] = useState(""); // 생년월일 메세지
 
-  let isId, isPw, isPwchk, isName, isEmail, isPhonenum,isBirth = false
+  const [veri, setVeri] = useState(false);
 
   // 아이디
   const idfocusout = (e) => {
     setId(e.target.value);
     console.log(e.target.value);
     const idreg = /^[a-zA-z0-9]{4,12}$/;
-    isId = false;
+    
     if (id.length === 0) {
       setIdMessage("아이디를 입력해주세요");
+      setVeri(false)
     } else if (id.length < 4 || id.length > 12 === idreg) {
       setIdMessage("4 ~ 12자 대소문자 또는 숫자만 입력해 주세요!");
+      setVeri(false)
     } else {
       setIdMessage("사용 가능한 아이디 입니다.");
-      isId = true;
+      setVeri(true)
     }
   };
 
@@ -50,52 +54,49 @@ const Join = (props, e) => {
   const pwfocusout = (e) => {
     setPassword(e.target.value);
     console.log(e.target.value);
-
-    isPw = false
-
     if (password.length === 0) {
       setPwMessage("비밀번호를 입력해주세요");
-      isPw = false;
+      setVeri(false)
     } else if (password.length < 8 || password.length > 16) {
       setPwMessage("8 ~ 16자 가능합니다");
+      setVeri(false)
     } else {
       setPwMessage("사용가능합니다.");
-      isPw = true;
+      setVeri(true)
     }
   };
 
   // 비밀번호 재확인
   const pwchkfocusout = (e) => {
     setPasswordChk(e.target.value);
-    isPwchk = false
     if (passwordChk.length === 0) {
       setPwChkMessage("필수요소입니다.");
+      setVeri(false)
     } else if (password !== passwordChk) {
       setPwChkMessage("비밀번호가 다릅니다.");
+      setVeri(false)
     } else {
       setPwChkMessage("");
-      isPwchk = true
+      setVeri(true)
     }
   };
 
   // 이름
   const namefocusout = (e) => {
     setName(e.target.value);
-
-    isName = false
     if (name.length === 0) {
       setNameMessage("필수요소입니다.");
+      setVeri(false)
     } else {
       setNameMessage("");
-      isName = true
+      setVeri(true)
     }
   };
 
   // 이메일
   const emailfocus = (e) => {
     setEmail(e.target.value);
-    let emailregExp =
-      /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
+    let emailregExp = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
     if (!emailregExp.test(email)) {
       setEmailMessage("이메일 주소를 다시 확인해주세요");
     } else {
@@ -103,29 +104,50 @@ const Join = (props, e) => {
     }
   };
 
+  //휴대전화
   const phoneNumber = (e) => {
     let phoneregExp = /^[0-9]{11}$/;
     setPhoneNum(e.target.value);
     console.log(e.target.value);
-
-    isPhonenum = false;
-    // setPhoneNum.test(phoneNum);
-    // console.log(phoneNum.test(phoneNum));
-    if (phoneNum.length === 0) {
+    if (phoneNum.length === 0 ) {
       setPhoneMessage("필수요소입니다");
-    } else if (isNaN(phoneNum)) {
+      setVeri(false)
+    }else if (phoneNum.length > 11){
+      setPhoneMessage("번호 11자리 입력하세요")
+      setVeri(false)
+    }else if (isNaN(phoneNum)) {
       setPhoneMessage("숫자만 입력해주세요");
+      setVeri(false)
     } else {
-      setPhoneMessage("");
-      isPhonenum = true;
+      setPhoneMessage("")
+      setVeri(true)
     }
   };
 
+  const btn = () => {
+    if(phoneNum.length === 11){
+      alert("인증번호가 발송되었습니다.")
+    }
+  }
+
+  const numtxt = (e) => {
+    setVeritext(e.target.value)
+    console.log(e.target.value)
+    if(e.target.value == '1234') {
+      setVeriTextMessage("인증되었습니다.")
+      setVeri(true)
+    }else if(e.target.value.length === 0){
+      setVeriTextMessage("인증번호를 입력해주세요")
+      setVeri(false)
+    } else {
+      setVeriTextMessage("인증번호 다시 확인해주세요.")
+      setVeri(false)
+    }
+  }
+ 
   // 생년월일
   const birth = (e) => {
     setYear, setMonth, setDay(e.target.value);
-
-    isBirth = false
 
     // 현재 날짜 및 시간
     let now = new Date();
@@ -141,41 +163,18 @@ const Join = (props, e) => {
 
     if (isNaN(year) == true || isNaN(month) == true || isNaN(day) == true) {
       setBirthMessage("생년월일을 다시 확인해주세요");
+      setVeri(false)
     }else if (year.length != 4 && year.length === 4) {
       setBirthMessage("태어난 연도 4자리를 정확하게 입력해주세요");
+      setVeri(false)
     }else if (day.length === 0 || day > 31 || day < 1) {
       setBirthMessage("태어난 일(날짜)을 정확하게 입력해주세요");
+      setVeri(false)
     } else {
       setBirthMessage("");
-      isBirth = true;
+      setVeri(true)
     }
-
-    
   };
-
-  const [code, setCode] = useState('');
-  const[inputCode, setInputCode] = useState('');
-
-  useEffect(() => {
-    let code = '';
-    for(let i = 0; i < 4; i++) {
-      code += Math.floor(Math.random() * 10);
-    }
-    setCode(code);
-  }, [])
-
-  const handleChange = (e) => {
-    setInputCode(e.target.value);
-    console.log(setInputCode)
-  }
-
-  const handleClick = () => {
-    if(inputCode === code) {
-      alert('인증에 성공했습니다.');
-    }else {
-      alert('인증번호가 일치하지 않습니다.')
-    }
-  }
 
   return (
     <div className="wrapper">
@@ -355,19 +354,19 @@ const Join = (props, e) => {
                     type="text"
                     name="phonenum"
                     placeholder="전화번호 입력"
-                    onChange={handleChange}
+                    onChange={phoneNumber}
                     onBlur={phoneNumber}
-                    value={inputCode}
                   />
                 </div>
-                <button type="button" onClick={handleClick}>인증번호</button>
+                <button type="button" onClick={btn}>인증번호</button>
               </div>
               <p className="warn">{phonenumMessage}</p>
 
               <div className="disinput inp">
-                {/* API로 인증번호따오기 */}
-                <input type="text" placeholder="인증번호"  />
+                <input type="text" placeholder="인증번호" onChange={numtxt}/>
               </div>
+
+              <p>{veritextMessage}</p>
 
               <div className="event">
                 <input type="checkbox" />
@@ -378,8 +377,15 @@ const Join = (props, e) => {
         </div>
 
         {/* 가입하기버튼*/}
+        {/* isId && isPw && isPwchk && isName && isPhonenum && isveritext && isBirth */}
         <div className="join-btn-box">
-          <button>가입하기</button>
+          <button type="submit" onClick={() => {
+            if (!veri === false){
+              alert('필수요소를 입력해주세요');
+            }else {
+              SubmitEvent
+            }
+          }}>가입하기</button>
         </div>
 
         <div className="footer">

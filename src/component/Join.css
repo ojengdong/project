@@ -90,6 +90,7 @@ strong {
     height: 25px;
     margin: 7px;
     border: none;
+    cursor: pointer;
 }
 
 .day-box {
@@ -123,6 +124,7 @@ strong {
     display: flex;
     margin: 7px;
     border: none;
+    cursor: pointer;
 }
 
 .phonenum {
@@ -147,6 +149,7 @@ strong {
     display: flex;
     margin: 7px;
     border: none;
+    cursor: pointer;
 }
 
 .phonenum {
@@ -183,6 +186,7 @@ strong {
     background-color: #3395e5;
     color: #fff;
     border: none;
+    cursor: pointer;
 }
 
 .event {
@@ -197,4 +201,5 @@ strong {
     background-color: #3395e5;
     color: #fff;
     margin-bottom: 15px;
+    cursor: pointer;
 }
