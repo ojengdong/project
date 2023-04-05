@@ -371,8 +371,13 @@ const Join = (props, e) => {
 
         {/* 가입하기버튼*/}
         <div className="join-btn-box">
-          <form onSubmit={<Login/>}>
-          <button type="button">가입하기</button>
+          <form>
+          <button type="button" onClick={()=>{
+            const navigate = useNavigate()
+            veri === false ? alert('필수요건을 입력하세요') : navigate('/');
+            
+
+          }}>가입하기</button>
           </form>
         </div>
           <Footer />
