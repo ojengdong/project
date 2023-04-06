@@ -21,6 +21,7 @@ select:focus {
 }
 
 .logo-box img {
+    display: flex;
     width: 130px;
     margin: 30px auto;
 }
@@ -191,6 +192,11 @@ strong {
 
 .event {
     margin-top: 10px;
+}
+
+.join-btn-box {
+    display: flex;
+    justify-content: center;
 }
 
 .join-btn-box button {

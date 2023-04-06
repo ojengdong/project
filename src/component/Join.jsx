@@ -181,6 +181,7 @@ const Join = (props, e) => {
   return (
     <div className="wrapper">
       <div className="join-container">
+      <form onSubmit={(e) => navigate('/Login')}>
         <div className="logo-box">
           <h1>
             <img src={logo} alt="" />
@@ -371,16 +372,14 @@ const Join = (props, e) => {
 
         {/* 가입하기버튼*/}
         <div className="join-btn-box">
-          <form>
-          <button type="button" onClick={()=>{
-            
-            veri === false ? alert('필수요건을 입력하세요') : navigate('/');
-            
-
+          <button type="submit" onClick={()=>{
+            localStorage.setItem('id',{setId})
+            veri === false ? alert('필수요건을 입력하세요') : navigate('/Login');
           }}>가입하기</button>
-          </form>
+          
         </div>
           <Footer />
+          </form>
       </div>
     </div>
   );

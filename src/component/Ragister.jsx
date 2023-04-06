@@ -12,7 +12,7 @@ import linkimg from "./images/동의 아이콘 4.png"// link
 const Ragister = (props) => {
   // 체크박스의 checkd 속성값인 true/false를 useState를 이용하여 저장 및 변경함.
   // 기능을 해당 체크 박스의 onChange 이벤트를 통해 기능 구현함.
-  // useEffect 를 이용해서 기능 구현. 위에 onChange 이벤트로는 세부항목 4개가 모두 체크된 즉시 
+  // useEffect 를 이용해서 기능 구현. 위에 onChange 이벤트로는 세부항목 2개가 모두 체크된 즉시 
   // 전체동의가 자동 체크되지 않으나, useEffect를 사용하면 모두 체크된 때(업데이트)를 캐치해 즉시 전체동의가 자동체크된게 된다.
 
   // 전체
@@ -30,7 +30,6 @@ const Ragister = (props) => {
       setUseCheck(false)
       setAgeCheck(false)
     } 
-    console.log(allCheck === false || useCheck === false || ageCheck === false)
   }
 
   const allBtnEvent = (props) => {
@@ -64,8 +63,8 @@ const Ragister = (props) => {
 
   useEffect((i) => {
     if (
-      useCheck === true &&
-      ageCheck === true
+      useCheck === true && ageCheck === true
+      
     ) {
       setAllCheck(true);
     } else {
