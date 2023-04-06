@@ -12,10 +12,7 @@ import Impo from './Join/Impo'
 import Phone from './Join/Phone'
 
 const Join = (props, e) => {
- 
-  const [phonenumMessage, setPhoneMessage] = useState(""); // 전화번호 메세지
-  const [veritextMessage, setVeriTextMessage] = useState("") 
-
+  const [veri, setVeri] = useState(false);
   const navigate = useNavigate()
   return (
     <div className="wrapper">
@@ -43,8 +40,8 @@ const Join = (props, e) => {
         {/* 가입하기버튼*/}
         <div className="join-btn-box">
           <button type="submit" onClick={()=>{
-            localStorage.setItem('id',[veri])
-            veri === false ? alert('필수요건을 입력하세요') : navigate('/Login');
+            //localStorage.setItem('id',[veri])
+            setVeri === false ? alert('필수요건을 입력하세요') : navigate('/Login');
           }}>가입하기</button>
           
         </div>

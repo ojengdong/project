@@ -14,9 +14,9 @@ const Phone = () => {
 
     const phoneNumber = (e) => {
         let phoneregExp = /^[0-9]{11}$/;
-        setPhoneNum(e.target.value);
+        setVeri(e.target.value);
         console.log(e.target.value);
-        if (phoneNum.length === 0 ) {
+        if (phoneNum.length === 0) {
           setPhoneMessage("필수요소입니다");
           setVeri(false)
         }else if (phoneNum.length > 11){
@@ -32,7 +32,7 @@ const Phone = () => {
       };
 
       const btn = () => {
-        if(phoneNum.length === 11){
+        if(phoneNumber === 11){
           alert("인증번호가 발송되었습니다.")
         }
       }
