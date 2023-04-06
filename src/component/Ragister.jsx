@@ -22,8 +22,6 @@ const Ragister = (props) => {
   const [ageCheck, setAgeCheck] = useState(false)
   const [submit, setSubmit] = useState(false)
 
-  const [savecheck, setSavecheck] = useState(false)
-
   const check = (e) => {
     if(allCheck === false,  useCheck === false, ageCheck === false) {
       e.preventDefault();
@@ -37,39 +35,29 @@ const Ragister = (props) => {
 
   const allBtnEvent = (props) => {
     if (allCheck === false) {
-      // 전체
       setAllCheck(true);
-      // 필수
       setUseCheck(true);
       setAgeCheck(true);
-
-      setSavecheck(true);
     } else {
       setAllCheck(false);
       setUseCheck(false);
       setAgeCheck(false);
-
-      setSavecheck(false);
     }
   };
 
   const useBtnEvent = (i) => {
     if (useCheck === false ) {
       setUseCheck(true);
-      setSavecheck(true);
     } else {
       setUseCheck(false);
-      setSavecheck(false);
     }
   };
 
-  const ageBtnEvent = () => {
+  const ageBtnEvent = (i) => {
     if(ageCheck === false ) {
       setAgeCheck(true);
-      setSavecheck(true);
     }else {
       setAgeCheck(false);
-      setSavecheck(false);
     }
   }
 
@@ -180,7 +168,7 @@ const Ragister = (props) => {
                 checked={ageCheck}
               ></div>
 
-              <span htmlFor="">
+              <span htmlFor="" onClick={()=> {ageBtnEvent(!setAgeCheck)}}>
                 <h3> 개인정보 수집 및 이용</h3>
                 <p>필수</p>
               </span>

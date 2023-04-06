@@ -15,7 +15,7 @@ function App() {
     <Routes>
       <Route path='/Join' element={<Join/>}/>
       <Route path='/Ragister' element={<Ragister/>}/>
-      <Route path='/' element={<Login/>}/>
+      <Route path='/Login' element={<Login/>}/>
     </Routes>
     </div>
   );  

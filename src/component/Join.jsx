@@ -33,7 +33,7 @@ const Join = (props, e) => {
   const [birthMessage, setBirthMessage] = useState(""); // 생년월일 메세지
 
   const [veri, setVeri] = useState(false);
-
+  const navigate = useNavigate()
   // 아이디
   const idfocusout = (e) => {
     setId(e.target.value);
@@ -373,7 +373,7 @@ const Join = (props, e) => {
         <div className="join-btn-box">
           <form>
           <button type="button" onClick={()=>{
-            const navigate = useNavigate()
+            
             veri === false ? alert('필수요건을 입력하세요') : navigate('/');
             
 
