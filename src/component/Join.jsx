@@ -12,12 +12,20 @@ import Impo from './Join/Impo'
 import Phone from './Join/Phone'
 
 const Join = (props, e) => {
-  const [veri, setVeri] = useState(false);
   const navigate = useNavigate()
+  const [veri, setVeri] = useState(false)
+  const [user, setUser] = useState(false)
+
+  const joinuser = (e) => {
+    e.preventDefault();
+
+
+  }
+  
   return (
     <div className="wrapper">
       <div className="join-container">
-      <form onSubmit={(e) => navigate('/Login')}>
+      <form onSubmit={navigate('/Login')}>
         <div className="logo-box">
           <h1>
             <img src={logo} alt="" />
@@ -25,23 +33,23 @@ const Join = (props, e) => {
         </div>
         <div className="inputbox">
           {/* 아이디 */}
-          <Id/>
+          <Id setVeri={setVeri}/>
 
           {/* 비밀번호,비밀번호 재확인 */}
-          <Pw/>
+          <Pw setVeri={setVeri}/>
 
           {/* 이름, 생년월일, 성별, 본인확인 이메일 */}
-          <Impo/>
+          <Impo setVeri={setVeri}/>
 
           {/* 휴대폰 */}
-          <Phone/>
+          <Phone  setVeri={setVeri}/>
         </div>
 
         {/* 가입하기버튼*/}
         <div className="join-btn-box">
-          <button type="submit" onClick={()=>{
-            //localStorage.setItem('id',[veri])
-            setVeri === false ? alert('필수요건을 입력하세요') : navigate('/Login');
+          <button type="submit" onSubmit={(e)=>{
+           
+            veri === fasle ? alert('필수요건을 입력하세요.') : navigate('/Login')
           }}>가입하기</button>
           
         </div>

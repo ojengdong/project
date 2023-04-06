@@ -58,10 +58,10 @@ const Impo = () => {
     if (isNaN(year) == true || isNaN(month) == true || isNaN(day) == true) {
       setBirthMessage("생년월일을 다시 확인해주세요");
       setVeri(false)
-    }else if (year.length != 4 && year.length === 4) {
+    }else if (year.length != 4 && year.length === '') {
       setBirthMessage("태어난 연도 4자리를 정확하게 입력해주세요");
       setVeri(false)
-    }else if (day.length === 0 || day > 31 || day < 1) {
+    }else if (day.length === 0 && day > 31 && day < 1) {
       setBirthMessage("태어난 일(날짜)을 정확하게 입력해주세요");
       setVeri(false)
     } else {

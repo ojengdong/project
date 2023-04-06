@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import '../Join.css'
 
-const Phone = () => {
+const Phone = (props) => {
     const [phoneNum, setPhoneNum] = useState(""); // 휴대폰 번호
     const [veritext, setVeritext] = useState("") // 인증번호 input
 
@@ -14,8 +14,9 @@ const Phone = () => {
 
     const phoneNumber = (e) => {
         let phoneregExp = /^[0-9]{11}$/;
-        setVeri(e.target.value);
+        setPhoneNum(e.target.value);
         console.log(e.target.value);
+        props.setVeri(e.target.value !== "")
         if (phoneNum.length === 0) {
           setPhoneMessage("필수요소입니다");
           setVeri(false)
@@ -31,8 +32,8 @@ const Phone = () => {
         }
       };
 
-      const btn = () => {
-        if(phoneNumber === 11){
+      const btn = (props) => {
+        if(phoneNum.length === 11){
           alert("인증번호가 발송되었습니다.")
         }
       }
