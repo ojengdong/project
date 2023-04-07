@@ -1,18 +1,15 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../Join.css";
 
 const Pw = (props) => {
-  const [password, setPassword] = useState(""); // 비밀번호
-  const [passwordChk, setPasswordChk] = useState(""); // 비밀번호 재확인
+  const [password, setPassword] = useState("");
+  const [passwordChk, setPasswordChk] = useState("");
+  const [pwMessage, setPwMessage] = useState("");
+  const [pwChkMessage, setPwChkMessage] = useState("");
 
-  const [pwMessage, setPwMessage] = useState(""); // 비밀번호 메세지
-  const [pwChkMessage, setPwChkMessage] = useState(""); // 비밀번호 재확인 메세지
-  // 비밀번호
   const pwfocusout = (e) => {
     setPassword(e.target.value);
-    console.log(e.target.value);
     if (password.length === 0) {
       setPwMessage("비밀번호를 입력해주세요");
     } else if (password.length < 8 || password.length > 16) {
@@ -22,7 +19,6 @@ const Pw = (props) => {
     }
   };
 
-  // 비밀번호 재확인
   const pwchkfocusout = (e) => {
     setPasswordChk(e.target.value);
     if (passwordChk.length === 0) {
@@ -46,7 +42,7 @@ const Pw = (props) => {
             <input
               type="password"
               name="pw"
-              vlaue={password}
+              value={password}
               onChange={pwfocusout}
               onBlur={pwfocusout}
             />
@@ -54,7 +50,6 @@ const Pw = (props) => {
           <p className="warn">{pwMessage}</p>
         </div>
 
-        {/* 비밀번호 재확인 */}
         <div className="pw-chk  margin">
           <strong>비밀번호 재확인</strong>
           <div className="inp">

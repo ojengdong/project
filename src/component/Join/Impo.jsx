@@ -86,7 +86,7 @@ const Impo = (props) => {
       // 입력된 생년도 값이 4자리가 아니거나 입력되지 않았을 경우
       setBirthMessage("태어난 연도 4자리를 정확하게 입력해주세요"); // 생년월일 입력에 대한 안내 메시지를 설정
       props.setImpoVeri(false); // 필수 입력 항목이 모두 입력되었는지 확인하는 상태값을 false로 설정
-    } else if (day.length === 0 || day > 31 || day < 1) {
+    } else if (day.length === 0 && day > 31 && day < 1) {
       // 입력된 생일 값이 1~31 사이의 값이 아닐 경우
       setBirthMessage("태어난 일(날짜)을 정확하게 입력해주세요"); // 생년월일 입력에 대한 안내 메시지를 설정
       props.setImpoVeri(false); // 필수 입력 항목이 모두 입력되었는지 확인하는 상태값을 false로 설정
