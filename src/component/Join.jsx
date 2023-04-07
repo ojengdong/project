@@ -23,7 +23,7 @@ const Join = (props) => {
   const [birth, setBirth] = useState("");
   const [phone, setPhone] = useState("");
 
-  const handleJoin = (props,e) => {
+  const handleJoin = (e) => {
     e.preventDefault();
 
     if (idVeri && pwVeri && impoVeri && phoneVeri) {
@@ -43,7 +43,7 @@ const Join = (props) => {
             </h1>
           </div>
           <div className="inputbox">
-            <Id setIDVeri={setIDVeri}  />
+            <Id setIDVeri={setIDVeri} />
             <Pw setPWVeri={setPWVeri} />
             <Impo setImpoVeri={setImpoVeri} />
             <Phone setPhoneVeri={setPhoneVeri} />

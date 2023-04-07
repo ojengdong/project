@@ -17,6 +17,7 @@ const Login = () => {
   const [idSave, setIdSave] = useState(false);
   const [keepid, setKeepId] = useState("");
   const [isRemember, setIsRemember] = useState(false);
+  const [userid,setUserId] = useState("")
   const [cookies, setCookie, removeCookie] = useCookies(['rememberId']);
 
   useEffect(() => {
@@ -51,7 +52,7 @@ const Login = () => {
           <div className="input-id login-inputbox">
             <p className="login-warn">아이디</p>
             <div className="input-box">
-              <input type="text" name="userid" />
+              <input type="text" name="userid" onChange={(e)=> {setUserId(e.target.value)}}/>
             </div>
           </div>
           {/* 비밀번호 input */}
@@ -75,13 +76,14 @@ const Login = () => {
                   onClick={() => {
                     setIdSave(!idSave);
                   }}
-                  onChange={handleOnChange}
+                  onChange={(e) => {handleOnChange(e)}}
+                  checked={isRemember}
                 ></div>
 
                 <p
-                  onClick={() => {
-                    setIdSave(!idSave);
-                  }}
+                  onClick={() => {setIdSave(!idSave);}}
+                  onChange={(e) => {handleOnChange(e)}}
+                  checked={isRemember}
                 >
                   아이디 저장
                 </p>
@@ -99,9 +101,11 @@ const Login = () => {
 
       {/* 로그인, 회원가입 버튼 */}
       <div className="login-btn-box">
-        <button type="button" disabled={disabled} id="login-btn">
+        <Link to='/'>
+        <button type="button" id="login-btn">
           로그인
         </button>
+        </Link>
         <Link to="/Ragister">
           <button type="submit" id="Ragister-btn">
             회원가입

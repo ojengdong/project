@@ -22,9 +22,9 @@ const Phone = (props) => {
   };
 
   const btn = () => {
-    if (phoneNum.length === 11) {
-      alert("인증번호가 발송되었습니다.");
-    }
+    phoneNum.length === 11 
+    ? alert("인증번호가 발송되었습니다") 
+    : alert("전화번호 11자리 입력해주세요")
   };
 
   const numtxt = (e) => {
