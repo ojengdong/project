@@ -10,6 +10,12 @@ const Pw = (props) => {
 
   const pwfocusout = (e) => {
     setPassword(e.target.value);
+
+    e.preventDefault()
+    const userPw= {
+      Password: password
+    }
+    localStorage.setItem('Password', password)
     if (password.length === 0) {
       setPwMessage("비밀번호를 입력해주세요");
     } else if (password.length < 8 || password.length > 16) {

@@ -16,16 +16,7 @@ const Join = (props) => {
   const [impoVeri, setImpoVeri] = useState(false);
   const [phoneVeri, setPhoneVeri] = useState(false);
 
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [birth, setBirth] = useState("");
-  const [phone, setPhone] = useState("");
-
   const handleJoin = (e) => {
-    e.preventDefault();
-
     if (idVeri && pwVeri && impoVeri && phoneVeri) {
       navigate("/Login");
     } else {
@@ -45,7 +36,7 @@ const Join = (props) => {
           <div className="inputbox">
             <Id setIDVeri={setIDVeri} />
             <Pw setPWVeri={setPWVeri} />
-            <Impo setImpoVeri={setImpoVeri} />
+            <Impo setImpoVeri={setImpoVeri}  />
             <Phone setPhoneVeri={setPhoneVeri} />
           </div>
           <div className="join-btn-box">
