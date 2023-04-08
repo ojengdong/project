@@ -10,7 +10,7 @@ const Pw = (props) => {
 
   const pwfocusout = (e) => {
     setPassword(e.target.value);
-
+    // console.log('dududd'+password)
     e.preventDefault()
     const userPw= {
       Password: password

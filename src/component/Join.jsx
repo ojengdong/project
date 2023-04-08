@@ -10,17 +10,30 @@ import Impo from "./Join/Impo";
 import Phone from "./Join/Phone";
 
 const Join = (props) => {
+  // |이 코드는 회원가입 페이지에서 필수 입력 항목들을 검증하고, 모든 항목이 완료되면 로그인 페이지로 이동하는 기능을 구현한 것입니다.
+  // |
+  // |좋은 점:
+  // |- 필수 입력 항목들을 검증하는 상태 변수들을 따로 만들어서 가독성이 좋습니다.
+  // |- 검증이 완료되지 않았을 경우 경고창을 띄우는 부분이 구현되어 있어 사용자가 빠뜨린 항목이 있는지 쉽게 확인할 수 있습니다.
+  // |
+  // |나쁜 점:
+  // |- 검증이 완료되었을 경우에만 로그인 페이지로 이동하는데, 이때 로컬 스토리지에서 ID와 비밀번호를 가져와서 사용자 인증을 하는 부분이 빠져 있습니다. 따라서 이 부분을 구현해야 합니다.
   const navigate = useNavigate();
-  const [idVeri, setIDVeri] = useState(false);
-  const [pwVeri, setPWVeri] = useState(false);
-  const [impoVeri, setImpoVeri] = useState(false);
-  const [phoneVeri, setPhoneVeri] = useState(false);
+  const [idVeri, setIDVeri] = useState(false); // ID 검증 상태
+  const [pwVeri, setPWVeri] = useState(false); // 비밀번호 검증 상태
+  const [impoVeri, setImpoVeri] = useState(false); // 필수 입력 항목 검증 상태
+  const [phoneVeri, setPhoneVeri] = useState(false); // 전화번호 검증 상태
 
   const handleJoin = (e) => {
     if (idVeri && pwVeri && impoVeri && phoneVeri) {
-      navigate("/Login");
+      // 모든 검증이 완료되었을 경우
+      const Id = localStorage.getItem("id"); // 로컬 스토리지에서 ID 가져오기
+      const password = localStorage.getItem("Password"); // 로컬 스토리지에서 비밀번호 가져오기
+      console.log(Id, password);
+      navigate("/Login"); // 로그인 페이지로 이동
     } else {
-      alert("필수입력항목을 입력해주세요");
+      // 검증이 완료되지 않았을 경우
+      alert("필수입력항목을 입력해주세요"); // 경고창 띄우기
     }
   };
 
@@ -36,7 +49,7 @@ const Join = (props) => {
           <div className="inputbox">
             <Id setIDVeri={setIDVeri} />
             <Pw setPWVeri={setPWVeri} />
-            <Impo setImpoVeri={setImpoVeri}  />
+            <Impo setImpoVeri={setImpoVeri} />
             <Phone setPhoneVeri={setPhoneVeri} />
           </div>
           <div className="join-btn-box">

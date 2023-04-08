@@ -16,7 +16,7 @@ const Id = (props) => {
   const idfocusout = (e) => {
     // idfocusout 함수를 선언하고 매개변수로 이벤트 객체 e를 받는다.
     setId(e.target.value); // setId 함수를 사용하여 id 상태값을 이벤트 객체의 value 값으로 변경한다.
-    //console.log('123213'+id)
+    // console.log('123213'+id)
     const idreg = /^[a-zA-z0-9]{4,12}$/; // 아이디 유효성 검사를 위한 정규식을 선언한다.
     e.preventDefault()
     const userId= {
