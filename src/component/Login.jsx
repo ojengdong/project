@@ -15,27 +15,37 @@ import idsth from "./images/로그인 아이콘-05.png"; // check
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const [idSave, setIdSave] = useState(false);
-  const [keepid, setKeepId] = useState("");
-  const [isRemember, setIsRemember] = useState(false);
-  const [userid,setUserId] = useState("")
-  const [cookies, setCookie, removeCookie] = useCookies(['rememberId']);
+  const [idvalue, setIdValue] = useState("");
+  const [pwvalue, setPwValue] = useState("");
+  const [cookie, setCookie, removeCookie] = useState(["userInfo"])
 
-  useEffect(() => {
-    if(cookies.rememberId !== undefined) {
-      setKeepId(cookies.rememberId);
-      setIsRemember(true);
+  useEffect(()=> {
+    const id = localStorage.getItem("idSave");
+    if(id){
+      setIdSave(JSON.parse(id));
+      console.log(id);
     }
   }, [])
 
-  const handleOnChange = (e) => {
-    setIsRemember(e.target.check);
-    if(e.target.check){
-      setCookie('rememberId', id)
-    }else {
-      removeCookie('rememberId');
-    }
+  useEffect(()=> {
+    localStorage.setItem("idSave",JSON.stringify(idSave));
+    console.log(idSave);
+  }, [idSave])
+
+  const handleIdChange = (e) =>{
+    setIdValue(e.target.value);
+    console.log(idvalue)
   }
 
+  const handlePwChange = (e) => {
+    setPwValue(e.target.value);
+  }
+
+  const handleSubmit = () => {
+    const userInfo = {id: idvalue, pw:pwvalue};
+    setCookie ("userInfo", userInfo);
+    console.log(cookie)
+  }
   return (
     <div className="wrapper">
       <div className="container">
@@ -52,14 +62,14 @@ const Login = () => {
           <div className="input-id login-inputbox">
             <p className="login-warn">아이디</p>
             <div className="input-box">
-              <input type="text" name="userid" onChange={(e)=> {setUserId(e.target.value)}}/>
+              <input type="text" name="userid" onChange={handleIdChange}/>
             </div>
           </div>
           {/* 비밀번호 input */}
           <div className="input-pw login-inputbox">
             <p className="login-warn">비밀번호</p>
             <div className="input-box">
-              <input type="password" name="userpw" />
+              <input type="password" name="userpw" onChange={handlePwChange}/>
             </div>
           </div>
           {/* 아이디 저장 및 아이디 찾기, 비밀번호 찾기 */}
@@ -76,14 +86,10 @@ const Login = () => {
                   onClick={() => {
                     setIdSave(!idSave);
                   }}
-                  onChange={(e) => {handleOnChange(e)}}
-                  checked={isRemember}
                 ></div>
 
                 <p
                   onClick={() => {setIdSave(!idSave);}}
-                  onChange={(e) => {handleOnChange(e)}}
-                  checked={isRemember}
                 >
                   아이디 저장
                 </p>
@@ -102,7 +108,7 @@ const Login = () => {
       {/* 로그인, 회원가입 버튼 */}
       <div className="login-btn-box">
         <Link to='/'>
-        <button type="button" id="login-btn">
+        <button type="button" id="login-btn" onClick={handleSubmit} disabled={disabled}>
           로그인
         </button>
         </Link>
