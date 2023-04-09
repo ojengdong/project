@@ -13,38 +13,54 @@ import deidsth from "./images/로그인 아이콘-06.png"; // uncheck
 import idsth from "./images/로그인 아이콘-05.png"; // check
 
 const Login = () => {
-  const [disabled, setDisabled] = useState(true);
-  const [idSave, setIdSave] = useState(false);
-  const [idvalue, setIdValue] = useState("");
-  const [pwvalue, setPwValue] = useState("");
-  const [cookie, setCookie, removeCookie] = useState(["userInfo"])
+  const [disabled, setDisabled] = useState(true); // disabled 상태와 disabled 상태를 변경하는 setDisabled 함수를 생성하고, 초기값을 true로 설정한다.
+  const [idSave, setIdSave] = useState(false); // idSave 상태와 idSave 상태를 변경하는 setIdSave 함수를 생성하고, 초기값을 false로 설정한다.
+  const [idvalue, setIdValue] = useState(""); // idvalue 상태와 idvalue 상태를 변경하는 setIdValue 함수를 생성하고, 초기값을 ""로 설정한다.
+  const [pwvalue, setPwValue] = useState(""); // pwvalue 상태와 pwvalue 상태를 변경하는 setPwValue 함수를 생성하고, 초기값을 ""로 설정한다.
+  const [cookie, setCookie, removeCookie] = useState(["userInfo"]); // cookie 상태와 cookie 상태를 변경하는 setCookie 함수, cookie 상태를 삭제하는 removeCookie 함수를 생성하고, 초기값을 ["userInfo"]로 설정한다.
 
-  useEffect(()=> {
-    const id = localStorage.getItem("idSave");
-    if(id){
-      setIdSave(JSON.parse(id));
+  // |이 코드는 React 함수형 컴포넌트에서 useEffect 훅과 useState 훅을 사용하여 로컬 스토리지와 쿠키를 다루는 예제입니다.
+  // |
+  // |좋은 점:
+  // |- 로컬 스토리지와 쿠키를 다루는 방법을 보여주어 유용합니다.
+  // |- useEffect 훅을 사용하여 컴포넌트가 렌더링될 때마다 로컬 스토리지와 쿠키를 업데이트하는 코드를 작성할 필요가 없습니다.
+  // |
+  // |나쁜 점:
+  // |- handleIdChange 함수에서 idvalue 상태를 변경할 때 오타가 있습니다. idValue가 아닌 idvalue로 변경해야 합니다.
+  // |- handleSubmit 함수에서 setCookie 함수를 호출할 때 cookie 상태를 사용하고 있지만, cookie 상태는 이 함수 내에서 선언되지 않았습니다. 따라서 이 코드는 작동하지 않을 것입니다.
+  useEffect(() => {
+    const id = localStorage.getItem("idSave"); // localStorage에서 "idSave" 값을 가져와 id 변수에 할당한다.
+    if (id) {
+      setIdSave(JSON.parse(id)); // idSave 상태를 가져온 id 값으로 변경한다.
       console.log(id);
     }
-  }, [])
+  }, []);
 
-  useEffect(()=> {
-    localStorage.setItem("idSave",JSON.stringify(idSave));
+  useEffect(() => {
+    localStorage.setItem("idSave", JSON.stringify(idSave)); // idSave 상태가 변경될 때마다 localStorage에 "idSave" 키로 idSave 값을 저장한다.
     console.log(idSave);
-  }, [idSave])
+  }, [idSave]);
 
-  const handleIdChange = (e) =>{
-    setIdValue(e.target.value);
-    console.log(idvalue)
-  }
+  const handleIdChange = (e) => {
+    // input 요소의 값이 변경될 때마다 실행되는 함수
+    setIdValue(e.target.value); // idvalue 상태를 변경한다.
+    console.log(idvalue);
+  };
 
   const handlePwChange = (e) => {
-    setPwValue(e.target.value);
-  }
+    // input 요소의 값이 변경될 때마다 실행되는 함수
+    setPwValue(e.target.value); // pwvalue 상태를 변경한다.
+  };
 
   const handleSubmit = () => {
-    const userInfo = {id: idvalue, pw:pwvalue};
-    setCookie ("userInfo", userInfo);
-    console.log(cookie)
+    // form 요소가 제출될 때 실행되는 함수
+    const userInfo = { id: idvalue, pw: pwvalue }; // idvalue와 pwvalue 값을 가지고 userInfo 객체를 생성한다.
+    setCookie("userInfo", userInfo); // cookie 상태에 "userInfo" 키로 userInfo 객체를 저장한다.
+    console.log(cookie);
+  };
+
+  const userdisabled = () => {
+    
   }
   return (
     <div className="wrapper">
@@ -53,7 +69,7 @@ const Login = () => {
           <h1>로그인</h1>
           <span>
             로그인 하시면 대전광역시의 모든 서비스를 이용 하실 수 있습니다.
-            <br/>
+            <br />
             아직 회원이 아니시면 회원가입을 해주세요.
           </span>
         </div>
@@ -62,55 +78,62 @@ const Login = () => {
           <div className="input-id login-inputbox">
             <p className="login-warn">아이디</p>
             <div className="input-box">
-              <input type="text" name="userid" onChange={handleIdChange}/>
+              <input type="text" name="userid" onChange={handleIdChange} />
             </div>
           </div>
           {/* 비밀번호 input */}
           <div className="input-pw login-inputbox">
             <p className="login-warn">비밀번호</p>
             <div className="input-box">
-              <input type="password" name="userpw" onChange={handlePwChange}/>
+              <input type="password" name="userpw" onChange={handlePwChange} />
             </div>
           </div>
           {/* 아이디 저장 및 아이디 찾기, 비밀번호 찾기 */}
           <div className="login-functionbox">
-              <div className="keeptext-box">
-                <div
-                  htmlFor="id"
-                  className="check-img"
-                  style={
-                    idSave == true
-                      ? { backgroundImage: `url(${idsth})` }
-                      : { backgroundImage: `url(${deidsth})` }
-                  }
-                  onClick={() => {
-                    setIdSave(!idSave);
-                  }}
-                ></div>
+            <div className="keeptext-box">
+              <div
+                htmlFor="id"
+                className="check-img"
+                style={
+                  idSave == true
+                    ? { backgroundImage: `url(${idsth})` }
+                    : { backgroundImage: `url(${deidsth})` }
+                }
+                onClick={() => {
+                  setIdSave(!idSave);
+                }}
+              ></div>
 
-                <p
-                  onClick={() => {setIdSave(!idSave);}}
-                >
-                  아이디 저장
-                </p>
-              </div>
-              <div className="find-wrapbox">
-                <ul>
-                  <li>아이디찾기</li>
-                  <div></div>
-                  <li>비밀번호 찾기</li>
-                </ul>
-              </div>
+              <p
+                onClick={() => {
+                  setIdSave(!idSave);
+                }}
+              >
+                아이디 저장
+              </p>
             </div>
+            <div className="find-wrapbox">
+              <ul>
+                <li>아이디찾기</li>
+                <div></div>
+                <li>비밀번호 찾기</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* 로그인, 회원가입 버튼 */}
       <div className="login-btn-box">
-        <Link to='/'>
-        <button type="button" id="login-btn" onClick={handleSubmit} disabled={disabled}>
-          로그인
-        </button>
+        <Link to="/">
+          <button
+            type="button"
+            id="login-btn"
+            onClick={handleSubmit}
+            disabled={disabled}
+          >
+            로그인
+          </button>
         </Link>
         <Link to="/Ragister">
           <button type="submit" id="Ragister-btn">
