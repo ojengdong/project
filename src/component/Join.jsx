@@ -40,7 +40,7 @@ const Join = (props) => {
   return (
     <div className="wrapper">
       <div className="join-container">
-        <form>
+        <form onSubmit={(e) => handleJoin(e)}>
           <div className="logo-box">
             <h1>
               <img src={logo} alt="" />
@@ -53,7 +53,7 @@ const Join = (props) => {
             <Phone setPhoneVeri={setPhoneVeri} />
           </div>
           <div className="join-btn-box">
-            <button onClick={handleJoin}>가입하기</button>
+            <button type="submit" onClick={handleJoin}>가입하기</button>
           </div>
           <Footer />
         </form>

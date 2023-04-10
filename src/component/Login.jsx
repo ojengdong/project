@@ -45,6 +45,7 @@ const Login = () => {
     // input 요소의 값이 변경될 때마다 실행되는 함수
     setIdValue(e.target.value); // idvalue 상태를 변경한다.
     console.log(idvalue);
+
   };
 
   const handlePwChange = (e) => {
@@ -54,14 +55,12 @@ const Login = () => {
 
   const handleSubmit = () => {
     // form 요소가 제출될 때 실행되는 함수
-    const userInfo = { id: idvalue, pw: pwvalue }; // idvalue와 pwvalue 값을 가지고 userInfo 객체를 생성한다.
+    const userInfo = { id: idvalue, Password: pwvalue }; // idvalue와 pwvalue 값을 가지고 userInfo 객체를 생성한다.
     setCookie("userInfo", userInfo); // cookie 상태에 "userInfo" 키로 userInfo 객체를 저장한다.
-    console.log(cookie);
+    
   };
 
-  const userdisabled = () => {
-    
-  }
+  
   return (
     <div className="wrapper">
       <div className="container">
@@ -130,7 +129,6 @@ const Login = () => {
             type="button"
             id="login-btn"
             onClick={handleSubmit}
-            disabled={disabled}
           >
             로그인
           </button>
