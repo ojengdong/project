@@ -6,6 +6,7 @@ import Ragister from "./Ragister";
 import { Link } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import naver from "./images/로그인 아이콘-02.png"; // naver icon
 import apple from "./images/로그인 아이콘-03.png"; // apple icon
 import kakao from "./images/로그인 아이콘-04.png"; // kakao icon
@@ -18,6 +19,7 @@ const Login = () => {
   const [idvalue, setIdValue] = useState(""); // idvalue 상태와 idvalue 상태를 변경하는 setIdValue 함수를 생성하고, 초기값을 ""로 설정한다.
   const [pwvalue, setPwValue] = useState(""); // pwvalue 상태와 pwvalue 상태를 변경하는 setPwValue 함수를 생성하고, 초기값을 ""로 설정한다.
   const [cookie, setCookie, removeCookie] = useState(["userInfo"]); // cookie 상태와 cookie 상태를 변경하는 setCookie 함수, cookie 상태를 삭제하는 removeCookie 함수를 생성하고, 초기값을 ["userInfo"]로 설정한다.
+  let navigate = useNavigate()
 
   // |이 코드는 React 함수형 컴포넌트에서 useEffect 훅과 useState 훅을 사용하여 로컬 스토리지와 쿠키를 다루는 예제입니다.
   // |
@@ -45,7 +47,6 @@ const Login = () => {
     // input 요소의 값이 변경될 때마다 실행되는 함수
     setIdValue(e.target.value); // idvalue 상태를 변경한다.
     console.log(idvalue);
-
   };
 
   const handlePwChange = (e) => {
@@ -57,10 +58,9 @@ const Login = () => {
     // form 요소가 제출될 때 실행되는 함수
     const userInfo = { id: idvalue, Password: pwvalue }; // idvalue와 pwvalue 값을 가지고 userInfo 객체를 생성한다.
     setCookie("userInfo", userInfo); // cookie 상태에 "userInfo" 키로 userInfo 객체를 저장한다.
-    
   };
 
-  
+
   return (
     <div className="wrapper">
       <div className="container">
@@ -77,14 +77,14 @@ const Login = () => {
           <div className="input-id login-inputbox">
             <p className="login-warn">아이디</p>
             <div className="input-box">
-              <input type="text" name="userid" onChange={handleIdChange} />
+              <input type="text" name="userid" onChange={handleIdChange} value={idvalue}/>
             </div>
           </div>
           {/* 비밀번호 input */}
           <div className="input-pw login-inputbox">
             <p className="login-warn">비밀번호</p>
             <div className="input-box">
-              <input type="password" name="userpw" onChange={handlePwChange} />
+              <input type="password" name="userpw" onChange={handlePwChange} value={pwvalue}/>
             </div>
           </div>
           {/* 아이디 저장 및 아이디 찾기, 비밀번호 찾기 */}
@@ -126,9 +126,10 @@ const Login = () => {
       <div className="login-btn-box">
         <Link to="/">
           <button
-            type="button"
+            type="submit"
             id="login-btn"
             onClick={handleSubmit}
+            disabled={idvalue === '' || pwvalue === '' ? true : false}
           >
             로그인
           </button>
