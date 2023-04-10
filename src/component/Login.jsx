@@ -14,6 +14,15 @@ import deidsth from "./images/로그인 아이콘-06.png"; // uncheck
 import idsth from "./images/로그인 아이콘-05.png"; // check
 
 const Login = () => {
+// |이 코드는 React 함수형 컴포넌트에서 useEffect 훅과 useState 훅을 사용하여 로컬 스토리지와 쿠키를 다루는 예제입니다.
+// |
+// |좋은 점:
+// |- 로컬 스토리지와 쿠키를 다루는 방법을 보여주어 유용합니다.
+// |- useEffect 훅을 사용하여 컴포넌트가 렌더링될 때마다 로컬 스토리지와 쿠키를 업데이트하는 코드를 작성할 필요가 없습니다.
+// |
+// |나쁜 점:
+// |- handleIdChange 함수에서 idvalue 상태를 변경할 때 오타가 있습니다. idValue가 아닌 idvalue로 변경해야 합니다.
+// |- handleSubmit 함수에서 setCookie 함수를 호출할 때 cookie 상태를 사용하고 있지만, cookie 상태는 이 함수 내에서 선언되지 않았습니다. 따라서 이 코드는 작동하지 않을 것입니다.
   const [disabled, setDisabled] = useState(true); // disabled 상태와 disabled 상태를 변경하는 setDisabled 함수를 생성하고, 초기값을 true로 설정한다.
   const [idSave, setIdSave] = useState(false); // idSave 상태와 idSave 상태를 변경하는 setIdSave 함수를 생성하고, 초기값을 false로 설정한다.
   const [idvalue, setIdValue] = useState(""); // idvalue 상태와 idvalue 상태를 변경하는 setIdValue 함수를 생성하고, 초기값을 ""로 설정한다.
@@ -54,10 +63,11 @@ const Login = () => {
     setPwValue(e.target.value); // pwvalue 상태를 변경한다.
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     // form 요소가 제출될 때 실행되는 함수
-    const userInfo = { id: idvalue, Password: pwvalue }; // idvalue와 pwvalue 값을 가지고 userInfo 객체를 생성한다.
-    setCookie("userInfo", userInfo); // cookie 상태에 "userInfo" 키로 userInfo 객체를 저장한다.
+    e.preventDefault();
+   setCookie("userInfo", {id: idvalue, pw:pwvalue}, {path : '/'});
+   navigate('/')
   };
 
 
