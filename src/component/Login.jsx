@@ -36,9 +36,7 @@ const Login = () => {
   // |- 로컬 스토리지와 쿠키를 다루는 방법을 보여주어 유용합니다.
   // |- useEffect 훅을 사용하여 컴포넌트가 렌더링될 때마다 로컬 스토리지와 쿠키를 업데이트하는 코드를 작성할 필요가 없습니다.
   // |
-  // |나쁜 점:
-  // |- handleIdChange 함수에서 idvalue 상태를 변경할 때 오타가 있습니다. idValue가 아닌 idvalue로 변경해야 합니다.
-  // |- handleSubmit 함수에서 setCookie 함수를 호출할 때 cookie 상태를 사용하고 있지만, cookie 상태는 이 함수 내에서 선언되지 않았습니다. 따라서 이 코드는 작동하지 않을 것입니다.
+  
   useEffect(() => {
     const id = localStorage.getItem("idSave"); // localStorage에서 "idSave" 값을 가져와 id 변수에 할당한다.
     if (id) {
@@ -139,7 +137,7 @@ const Login = () => {
             type="submit"
             id="login-btn"
             onClick={handleSubmit}
-            disabled={idvalue === '' || pwvalue === '' ? true : false}
+            disabled={idvalue.length < 4 || idvalue.length > 12 || pwvalue === '' ? true : false}
           >
             로그인
           </button>

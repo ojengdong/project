@@ -9,7 +9,6 @@ import Ragister from './component/Ragister';
 import Join from './component/Join'
 
 function App() {
-  const [submit, setSubmit] = useState(true)
   return (
     <div>
     <Routes>
