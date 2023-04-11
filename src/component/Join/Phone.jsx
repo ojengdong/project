@@ -6,7 +6,6 @@ const Phone = (props) => {
   // |이 코드는 전화번호 인증 기능을 구현하는데 사용되는 React Hooks를 사용한 코드입니다.
   // |
   // |코드 특징:
-  // |- useState를 사용하여 state를 관리하고 있어서 코드가 간결하고 가독성이 좋습니다.
   // |- 전화번호 입력 시 유효성 검사를 하고, 인증번호 입력 시 일치 여부를 검사하여 인증 상태를 업데이트하는 기능이 구현되어 있습니다.
   const [phoneNum, setPhoneNum] = useState(""); // 전화번호를 입력받는 state
   const [veritext, setVeritext] = useState(""); // 인증번호를 입력받는 state

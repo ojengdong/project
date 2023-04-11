@@ -15,12 +15,6 @@ import idsth from "./images/로그인 아이콘-05.png"; // check
 
 const Login = () => {
   // |이 코드는 React 함수형 컴포넌트에서 useEffect 훅과 useState 훅을 사용하여 로컬 스토리지와 쿠키를 다루는 예제입니다.
-  // |
-  // |코드특징:
-  // |- 로컬 스토리지와 쿠키를 다루는 방법을 보여주어 유용합니다.
-  // |- useEffect 훅을 사용하여 컴포넌트가 렌더링될 때마다 로컬 스토리지와 쿠키를 업데이트하는 코드를 작성할 필요가 없습니다.
-  // |- 로컬 스토리지와 쿠키를 다루는 방법을 보여주어 유용합니다.
-  // |- useEffect 훅을 사용하여 컴포넌트가 렌더링될 때마다 로컬 스토리지와 쿠키를 업데이트하는 코드를 작성할 필요가 없습니다.
 
   const [disabled, setDisabled] = useState(true); // disabled 상태와 disabled 상태를 변경하는 setDisabled 함수를 생성하고, 초기값을 true로 설정한다.
   const [idSave, setIdSave] = useState(false); // idSave 상태와 idSave 상태를 변경하는 setIdSave 함수를 생성하고, 초기값을 false로 설정한다.
@@ -73,8 +67,9 @@ const Login = () => {
       path: "/"
     }); // 쿠키에 사용자 정보를 저장
     navigate("/"); // 페이지를 이동시킴
+    
   };
-
+  
   return (
     <div className="wrapper">
       <div className="container">
