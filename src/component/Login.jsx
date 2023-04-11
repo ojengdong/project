@@ -16,33 +16,23 @@ import idsth from "./images/로그인 아이콘-05.png"; // check
 const Login = () => {
   // |이 코드는 React 함수형 컴포넌트에서 useEffect 훅과 useState 훅을 사용하여 로컬 스토리지와 쿠키를 다루는 예제입니다.
   // |
-  // |좋은 점:
+  // |코드특징:
   // |- 로컬 스토리지와 쿠키를 다루는 방법을 보여주어 유용합니다.
   // |- useEffect 훅을 사용하여 컴포넌트가 렌더링될 때마다 로컬 스토리지와 쿠키를 업데이트하는 코드를 작성할 필요가 없습니다.
-  // |
-  // |나쁜 점:
-  // |- handleIdChange 함수에서 idvalue 상태를 변경할 때 오타가 있습니다. idValue가 아닌 idvalue로 변경해야 합니다.
-  // |- handleSubmit 함수에서 setCookie 함수를 호출할 때 cookie 상태를 사용하고 있지만, cookie 상태는 이 함수 내에서 선언되지 않았습니다. 따라서 이 코드는 작동하지 않을 것입니다.
-  // |이 코드는 React 함수형 컴포넌트에서 useEffect 훅과 useState 훅을 사용하여 로컬 스토리지와 쿠키를 다루는 예제입니다.
-  // |
-  // |좋은 점:
   // |- 로컬 스토리지와 쿠키를 다루는 방법을 보여주어 유용합니다.
   // |- useEffect 훅을 사용하여 컴포넌트가 렌더링될 때마다 로컬 스토리지와 쿠키를 업데이트하는 코드를 작성할 필요가 없습니다.
-  // |
-  // |나쁜 점:
-  // |- 코드의 가독성이 떨어집니다. 변수명이나 함수명이 직관적이지 않아 이해하기 어려울 수 있습니다.
-  // |- 코드의 주석이 부족합니다. 코드의 의도나 기능을 설명하는 주석이 없어 이해하기 어려울 수 있습니다.
-  // |
+
   const [disabled, setDisabled] = useState(true); // disabled 상태와 disabled 상태를 변경하는 setDisabled 함수를 생성하고, 초기값을 true로 설정한다.
   const [idSave, setIdSave] = useState(false); // idSave 상태와 idSave 상태를 변경하는 setIdSave 함수를 생성하고, 초기값을 false로 설정한다.
   const [idvalue, setIdValue] = useState(""); // idvalue 상태와 idvalue 상태를 변경하는 setIdValue 함수를 생성하고, 초기값을 ""로 설정한다.
   const [pwvalue, setPwValue] = useState(""); // pwvalue 상태와 pwvalue 상태를 변경하는 setPwValue 함수를 생성하고, 초기값을 ""로 설정한다.
   const [cookie, setCookie, removeCookie] = useState(["userInfo"]); // cookie 상태와 cookie 상태를 변경하는 setCookie 함수, cookie 상태를 삭제하는 removeCookie 함수를 생성하고, 초기값을 ["userInfo"]로 설정한다.
   let navigate = useNavigate();
+  const IDreg = /^[a-z]+[a-z0-9]{4,12}$/g;
 
   // |이 코드는 React 함수형 컴포넌트에서 useEffect 훅과 useState 훅을 사용하여 로컬 스토리지와 쿠키를 다루는 예제입니다.
   // |
-  // |좋은 점:
+  // |코드 특징:
   // |- 로컬 스토리지와 쿠키를 다루는 방법을 보여주어 유용합니다.
   // |- useEffect 훅을 사용하여 컴포넌트가 렌더링될 때마다 로컬 스토리지와 쿠키를 업데이트하는 코드를 작성할 필요가 없습니다.
 
@@ -62,7 +52,7 @@ const Login = () => {
   const handleIdChange = (e) => {
     // input 요소의 값이 변경될 때마다 실행되는 함수
     setIdValue(e.target.value); // idvalue 상태를 변경한다.
-    console.log(idvalue);
+    // console.log(idvalue);
   };
 
   const handlePwChange = (e) => {
@@ -70,11 +60,19 @@ const Login = () => {
     setPwValue(e.target.value); // pwvalue 상태를 변경한다.
   };
 
+  // |이 코드는 form 요소가 제출될 때 실행되는 함수를 정의하는 코드입니다.
+  // |
+  // |코드 특징:
+  // |- `e.preventDefault()`를 사용하여 이벤트의 기본 동작을 막아서, 페이지가 새로고침되지 않고 원하는 작업을 수행할 수 있습니다.
+  // |- `setCookie()` 함수를 사용하여 쿠키에 사용자 정보를 저장할 수 있습니다.
+  // |- `navigate()` 함수를 사용하여 페이지를 이동시킬 수 있습니다.
   const handleSubmit = (e) => {
     // form 요소가 제출될 때 실행되는 함수
-    e.preventDefault();
-    setCookie("userInfo", { id: idvalue, pw: pwvalue }, { path: "/" });
-    navigate("/");
+    e.preventDefault(); // 이벤트의 기본 동작을 막음
+    setCookie("userInfo", JSON.stringify({ id: idvalue, pw: pwvalue }), {
+      path: "/"
+    }); // 쿠키에 사용자 정보를 저장
+    navigate("/"); // 페이지를 이동시킴
   };
 
   return (
@@ -155,11 +153,7 @@ const Login = () => {
             type="submit"
             id="login-btn"
             onClick={handleSubmit}
-            disabled={
-              idvalue.length < 4 || idvalue.length > 12 || pwvalue === ""
-                ? true: false
-            }
-          >
+            disabled={idvalue.length < 4 || pwvalue.length === "" ? true : false}>
             로그인
           </button>
         </Link>
